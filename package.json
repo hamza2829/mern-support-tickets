@@ -1,0 +1,23 @@
+{
+  "name": "mern-support-tickets",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=22.12.0 <23"
+  },
+  "scripts": {
+    "demo": "concurrently -k -s first -n API,WEB \"npm run demo -w backend\" \"npm run dev -w frontend\"",
+    "dev": "concurrently -k -s first -n API,WEB \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "test": "npm run test -w backend && npm run test -w frontend",
+    "build": "npm run build -w backend && npm run build -w frontend",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "concurrently": "10.0.6",
+    "prettier": "3.9.10"
+  }
+}

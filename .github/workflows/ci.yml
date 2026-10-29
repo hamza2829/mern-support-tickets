@@ -1,0 +1,45 @@
+name: Test and build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  MONGOMS_DISABLE_POSTINSTALL: "1"
+
+jobs:
+  backend:
+    name: Backend / Jest and TypeScript
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - uses: actions/cache@v4
+        with:
+          path: backend/.cache/mongodb
+          key: mongodb-${{ runner.os }}-${{ runner.arch }}-8.2.6
+      - run: npm ci
+      - run: npm run test -w backend
+      - run: npm run build -w backend
+
+  frontend:
+    name: Frontend / Vitest and Vite
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run test -w frontend
+      - run: npm run build -w frontend
