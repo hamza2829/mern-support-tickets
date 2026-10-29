@@ -88,7 +88,7 @@ npm run build -w backend
 npm run build -w frontend
 ```
 
-**Local result: 64 API tests + 10 component tests passed; both builds passed.** CI runs the API tests/build and frontend tests/build as separate jobs on Ubuntu 24.04 with Node 22, using `npm ci` and the committed lockfile. It starts MongoDB through mongodb-memory-server, with no Docker or external database service. See [the workflow](.github/workflows/ci.yml) and [verification evidence](docs/VERIFICATION.md).
+**Verified locally and in Ubuntu CI: 64 API tests + 10 component tests passed; both builds passed.** [Successful CI run](https://github.com/hamza2829/mern-support-tickets/actions/runs/40792533290). CI runs the API tests/build and frontend tests/build as separate jobs on Ubuntu 24.04 with Node 22, using `npm ci` and the committed lockfile. It starts MongoDB through mongodb-memory-server, with no Docker or external database service. See [the workflow](.github/workflows/ci.yml) and [verification evidence](docs/VERIFICATION.md).
 
 | Checks                                        | What is actually exercised                                                                                                                                                                                                                                                                                  |
 | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

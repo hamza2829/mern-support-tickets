@@ -2,13 +2,15 @@
 
 Checked locally on **29 October 2026** using Windows, Node **22.19.0** and npm **10.9.3**. Code and checks were prepared/executed by Codex; no statement of the user's personal testing is implied.
 
-| Check                      | Observed result                                                               |
-| -------------------------- | ----------------------------------------------------------------------------- |
-| `npm run test -w backend`  | **64 passed**, Jest + Supertest + MongoDB 8.2.6 through mongodb-memory-server |
-| `npm run test -w frontend` | **10 passed**, Vitest + Testing Library + jsdom, three components             |
-| `npm run build`            | Backend TypeScript and frontend TypeScript/Vite builds passed                 |
-| Local readiness            | Frontend HTTP 200; API reported database connected                            |
-| Ubuntu CI                  | Workflow supplied; exact successful run will be recorded after publication    |
+| Check                      | Observed result                                                                                                                                              |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run test -w backend`  | **64 passed**, Jest + Supertest + MongoDB 8.2.6 through mongodb-memory-server                                                                                |
+| `npm run test -w frontend` | **10 passed**, Vitest + Testing Library + jsdom, three components                                                                                            |
+| `npm run build`            | Backend TypeScript and frontend TypeScript/Vite builds passed                                                                                                |
+| Local readiness            | Frontend HTTP 200; API reported database connected                                                                                                           |
+| Ubuntu CI                  | **SUCCESS**: 64 API tests, 10 component tests and both builds; [run 40792533290](https://github.com/hamza2829/mern-support-tickets/actions/runs/40792533290) |
+
+The linked Ubuntu 24.04 / Node 22 run validates implementation commit `ce9e647349141361c0a9dc3d972429d7fcc42d9e`. The subsequent documentation commit records the run evidence; the README badge follows the latest result.
 
 API tests use a real local mongod process. They isolate test collections between cases and disconnect/stop the database afterward. They do not rely on a developer's MongoDB service or Atlas credentials. A cached vendor binary avoids repeated downloads. The explicit test-only OS adapter follows [MongoDB NODE-7832](https://jira.mongodb.org/browse/NODE-7832); the unmodified runtime connection was also checked outside Jest.
 
